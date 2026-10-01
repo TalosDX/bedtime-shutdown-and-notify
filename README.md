@@ -27,12 +27,12 @@
 
 ### Установка
 
-1. Скачай репозиторий в постоянную папку, например `C:\Users\<ты>\Scripts\Bedtime`.
-2. Запусти:
+1. Скачай репозиторий в любую папку.
+2. Запусти в этой папке:
    ```powershell
    powershell -ExecutionPolicy Bypass -File .\install-task.ps1
    ```
-   Скрипт создаст (или перезапишет) задачу **«Автовыключение Компа»**. Она запускается каждый день в 21:45, 22:45 … 6:45, так что ПК выключается ровно в 22:00, 23:00 … 7:00. Если включить компьютер посреди ночи, он выключится в ближайший час.
+   Установщик скопирует скрипты в `%LOCALAPPDATA%\BedtimeShutdown`, поэтому скачанную папку потом можно удалить. Он создаст (или перезапишет) задачу **«Автовыключение Компа»**. Она запускается каждый день в 21:45, 22:45 … 6:45, так что ПК выключается ровно в 22:00, 23:00 … 7:00. Если включить компьютер посреди ночи, он выключится в ближайший час.
 
 Если появится ошибка «Отказано в доступе», запусти PowerShell от имени администратора.
 
@@ -53,7 +53,9 @@ Start-Sleep 60; wscript.exe .\run-hidden.vbs bedtime-shutdown.ps1 -Test
 ### Настройка
 
 - **Громкость:** переменные в начале `bedtime-shutdown.ps1`: `$WarnVolume`, `$MinVolume`, `$MaxVolume` (0.0–1.0).
-- **Расписание:** часы перечислены в `install-task.ps1`: `(21..23) + (0..6)`. После изменения запусти его ещё раз.
+- **Расписание:** часы перечислены в `install-task.ps1`: `(21..23) + (0..6)`.
+
+Меняй файлы в скачанной папке и снова запускай `install-task.ps1`, он обновит установленную копию и задачу.
 
 ### Ограничения
 
@@ -67,7 +69,7 @@ Start-Sleep 60; wscript.exe .\run-hidden.vbs bedtime-shutdown.ps1 -Test
 |---|---|
 | `bedtime-shutdown.ps1` | основной скрипт: предупреждения, ч/б, отсчёт, выключение |
 | `run-hidden.vbs` | запускает `.ps1` без окна консоли |
-| `install-task.ps1` | создаёт задачу в Планировщике |
+| `install-task.ps1` | копирует скрипты в `%LOCALAPPDATA%\BedtimeShutdown` и создаёт задачу в Планировщике |
 | `tick.wav` | мягкий бип для отсчёта (880 Гц, 120 мс) |
 
 ---
@@ -97,12 +99,12 @@ Banner text is in Russian. Change the `Show-Warning` strings in `bedtime-shutdow
 
 ### Install
 
-1. Download the repo to a permanent folder, e.g. `C:\Users\<you>\Scripts\Bedtime`.
-2. Run:
+1. Download the repo to any folder.
+2. Run this in that folder:
    ```powershell
    powershell -ExecutionPolicy Bypass -File .\install-task.ps1
    ```
-   This creates (or overwrites) the scheduled task **"Автовыключение Компа"**. It runs daily at 21:45, 22:45 … 6:45, so the PC shuts down exactly at 22:00, 23:00 … 7:00. If you turn the computer on in the middle of the night, it shuts down at the next full hour.
+   The installer copies the scripts to `%LOCALAPPDATA%\BedtimeShutdown`, so you can delete the downloaded folder afterwards. It creates (or overwrites) the scheduled task **"Автовыключение Компа"**. It runs daily at 21:45, 22:45 … 6:45, so the PC shuts down exactly at 22:00, 23:00 … 7:00. If you turn the computer on in the middle of the night, it shuts down at the next full hour.
 
 If you get "Access denied", run PowerShell as administrator.
 
@@ -123,7 +125,9 @@ Start-Sleep 60; wscript.exe .\run-hidden.vbs bedtime-shutdown.ps1 -Test
 ### Configuration
 
 - **Volume:** variables at the top of `bedtime-shutdown.ps1`: `$WarnVolume`, `$MinVolume`, `$MaxVolume` (0.0–1.0).
-- **Schedule:** the hours are listed in `install-task.ps1`: `(21..23) + (0..6)`. Run it again after editing.
+- **Schedule:** the hours are listed in `install-task.ps1`: `(21..23) + (0..6)`.
+
+Edit the files in the downloaded folder and run `install-task.ps1` again. It updates the installed copy and the task.
 
 ### Limitations
 
@@ -137,7 +141,7 @@ Start-Sleep 60; wscript.exe .\run-hidden.vbs bedtime-shutdown.ps1 -Test
 |---|---|
 | `bedtime-shutdown.ps1` | main script: warnings, grayscale, countdown, shutdown |
 | `run-hidden.vbs` | runs a `.ps1` with no console window |
-| `install-task.ps1` | registers the scheduled task |
+| `install-task.ps1` | copies the scripts to `%LOCALAPPDATA%\BedtimeShutdown` and registers the scheduled task |
 | `tick.wav` | soft countdown beep (880 Hz, 120 ms) |
 
 ---
