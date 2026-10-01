@@ -139,3 +139,7 @@ Start-Sleep 60; wscript.exe .\run-hidden.vbs bedtime-shutdown.ps1 -Test
 | `run-hidden.vbs` | runs a `.ps1` with no console window |
 | `install-task.ps1` | registers the scheduled task |
 | `tick.wav` | soft countdown beep (880 Hz, 120 ms) |
+
+---
+
+MIT License — see [LICENSE](LICENSE).
